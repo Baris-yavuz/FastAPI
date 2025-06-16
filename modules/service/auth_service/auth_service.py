@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from modules.db.db import fake_kullanici_db
+from modules.db.service import fake_kullanici_db
 from modules.model.model import kullaniciInDB
 from datetime import datetime, timedelta
 from typing import Optional

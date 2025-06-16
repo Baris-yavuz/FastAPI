@@ -9,6 +9,3 @@ class kullaniciInDB(kullanici):
     hashed_password: str
     is_admin: bool = False  # Varsayılan olarak admin değil
 
-class LoginRequest(BaseModel):
-    email: str
-    password: str
