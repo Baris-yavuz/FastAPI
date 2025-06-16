@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from kullanicilar.model.model import LoginRequest
-from kullanicilar.service.auth_service.auth_service import authenticate_kullanici, create_access_token
+from modules.model.model import LoginRequest
+from modules.service.auth_service.auth_service import authenticate_kullanici, create_access_token
 from datetime import timedelta
 
 router = APIRouter()

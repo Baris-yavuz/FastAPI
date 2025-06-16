@@ -1,11 +1,12 @@
 from passlib.context import CryptContext
-from kullanicilar.db.db import fake_kullanici_db
-from kullanicilar.model.model import kullaniciInDB
+from modules.db.db import fake_kullanici_db
+from modules.model.model import kullaniciInDB
 from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from jose import JWTError, jwt
+from pyjwt import jwt
+# from jose import JWTError, jwt
 
 # Şifreleme sistemi (bcrypt ile)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

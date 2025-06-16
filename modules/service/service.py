@@ -1,4 +1,4 @@
-from kullanicilar.model.model import kullanici 
+from modules.model.model import kullanici 
 
 
 kullanicilar = [

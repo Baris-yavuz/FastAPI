@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from kullanicilar.service.auth_service.auth_service import get_current_kullanici
-from kullanicilar.model.model import kullaniciInDB
+from modules.service.auth_service.auth_service import get_current_kullanici
+from modules.model.model import kullaniciInDB
 
 router = APIRouter(
     prefix="/admin",

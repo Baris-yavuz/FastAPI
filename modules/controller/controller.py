@@ -1,9 +1,9 @@
 from fastapi import APIRouter
-from kullanicilar.service.service import get_all_kullanicilar, get_kullanici_id
-from kullanicilar.service.auth_service.auth_service import authenticate_kullanici, create_access_token
-from kullanicilar.service.auth_service.auth_service import timedelta
-from kullanicilar.model.model import LoginRequest
-from kullanicilar.controller.auth_controller.auth_controller import HTTPException
+from modules.service.service import get_all_kullanicilar, get_kullanici_id
+from modules.service.auth_service.auth_service import authenticate_kullanici, create_access_token
+from modules.service.auth_service.auth_service import timedelta
+from modules.model.model import LoginRequest
+from modules.controller.auth_controller.auth_controller import HTTPException
 
 router = APIRouter() 
 

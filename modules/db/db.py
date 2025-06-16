@@ -1,4 +1,4 @@
-from kullanicilar.model.model import kullaniciInDB
+from modules.model.model import kullaniciInDB
 
 fake_kullanici_db = {
     "test@example.com": kullaniciInDB(
