@@ -1,17 +1,20 @@
 from fastapi import FastAPI
 import uvicorn
 from modules.auth.controller import router as auth_router
-# from modules.controller.controller import router as kullanicilar_router
-# from modules.admin import admin_controller
+from modules.auth.controller import routerAdmin as adminRouter
 
 
-app = FastAPI() # burada web üzerinde api uygulaması başlattık.
+app = FastAPI(
+    title="My API",
+    docs_url="/docs",  # ← Bu satırı ekle
+    redoc_url="/redoc"
+    ) # burada web üzerinde api uygulaması başlattık.
 
 
-# app.include_router(kullanicilar_router, prefix="/kullanicilar", tags=["kullanicilar"])
-# app.include_router(admin_controller.router)
 
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
+
+app.include_router(adminRouter, prefix="/admin", tags=["admin"])
 
 
 if __name__ == "__main__":
