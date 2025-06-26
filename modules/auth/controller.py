@@ -31,7 +31,7 @@ def login(username: str, password: str):
     if not user_data:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı")
     
-    user_id = user_data.get("user_id")
+    user_id = user_data.get("_id")
 
     token = AuthService.create_user_token(username=username, user_id = str(user_id))
 
@@ -86,12 +86,12 @@ def get_admin(current_admin: dict = Depends(AuthService.get_current_admin)):
 def list_all_users(current_admin: dict = Depends(AuthService.get_current_admin)):
     return {"users": AuthService.get_all_users()}
 
-@routerAdmin.put("/user->uptadeMail")
+@routerAdmin.put("/user/uptadeMail")
 def admin_update_user(user_id: int, email: str, current_admin: dict = Depends(AuthService.get_current_admin)):
     update = UserUpdate(email=email)
     return AuthService.update_user_email(user_id, update)
 
-@routerAdmin.delete("/user->delete")
+@routerAdmin.delete("/user/delete")
 def admin_delete_user(user_id: int, current_admin: dict = Depends(AuthService.get_current_admin)):
     success = AuthService.delete_user(user_id)
     if success:

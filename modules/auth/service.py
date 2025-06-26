@@ -1,6 +1,7 @@
 from modules.auth.models.userCreate import UserCreate
 from modules.db.service import DBService, settings
 from modules.auth.models.loginRequest import UserLogin
+from bson import ObjectId
 import hashlib
 from jose import jwt
 from jose.exceptions import ExpiredSignatureError, JWTError
@@ -183,7 +184,7 @@ class AuthService:
     @staticmethod
     def create_user_token(username: str, user_id):
         payload = {
-            "sub": str(user_id),
+            "id": str(user_id),
             "username": username,
             "exp": datetime.utcnow() + timedelta(minutes=30),
             "role":"user"
@@ -197,13 +198,11 @@ class AuthService:
     def get_current_user(token: HTTPAuthorizationCredentials = Depends(security)):
         try:
             payload = jwt.decode(token.credentials, settings.SECRET_KEY, algorithms=[ALGORITHM])
-            user_id = payload.get("sub")
-            username = payload.get("username")
-            role = payload.get("role")
-
-            if user_id is None or username is None or role != "user":
-                raise HTTPException(status_code=403, detail="Normal kullanıcı yetkisi gerekli")
-            return {"user_id": int(user_id), "username": username, "role": role}
+            user_id = payload.get("id")
+            user = DBService.auth.find_one({"_id": ObjectId(user_id)})
+            if user:
+                user["_id"] = str(user["_id"])  # Convert ObjectId to string
+            return user
         except ExpiredSignatureError:
             raise HTTPException(status_code=401, detail="Token süresi dolmuş")
         except JWTError:
